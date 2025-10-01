@@ -1,9 +1,17 @@
 from kivy.app import App
-from kivy.uix.button import Button
+from kivy.uix.boxlayout import BoxLayout
+from kivy.properties import StringProperty
 
-class TestApp(App):
+class DoorbellLayout(BoxLayout):
+    status_text = StringProperty("아무도 없어요.")
+
+    def on_button_press(self):
+        print("초인종이 눌렸습니다!")
+        self.status_text = "딩동! 누가 왔어요!"
+
+class DoorbellApp(App):
     def build(self):
-        return Button(text='Hello TinkerBell!')
+        return DoorbellLayout()
 
 if __name__ == '__main__':
-    TestApp().run()
+    DoorbellApp().run()

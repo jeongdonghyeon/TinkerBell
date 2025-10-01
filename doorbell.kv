@@ -1,0 +1,22 @@
+<Label, Button>:
+    font_name: 'BMJUA_ttf.ttf'
+
+<DoorbellLayout>:
+    orientation: 'vertical'
+    spacing: 10
+    padding: 10
+
+    Label:
+        text: "초인종"
+        font_size: '32sp'
+        size_hint_y: None
+        height: self.texture_size[1]
+
+    Button:
+        text: "띵동"
+        font_size: '32sp'
+        on_press: root.on_button_press()
+
+    Label:
+        text: root.status_text
+        font_size: '20sp'
