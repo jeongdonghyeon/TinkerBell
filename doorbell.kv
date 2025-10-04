@@ -1,22 +1,127 @@
-<Label, Button>:
-    font_name: 'BMJUA_ttf.ttf'
+#:import dp kivy.metrics.dp
 
-<DoorbellLayout>:
-    orientation: 'vertical'
-    spacing: 10
-    padding: 10
+<DoorbellScreen>:
+    MDBoxLayout:
+        orientation: "vertical"
+        md_bg_color: 0xEB/255, 0xF1/255, 0xFF/255, 1
 
-    Label:
-        text: "초인종"
-        font_size: '32sp'
-        size_hint_y: None
-        height: self.texture_size[1]
+        # 상단바
+        MDBoxLayout:
+            orientation: "horizontal"
+            size_hint_y: None
+            height: dp(50)
+            padding: [dp(15), 0, dp(15), 0]
+            spacing: dp(15)
 
-    Button:
-        text: "띵동"
-        font_size: '32sp'
-        on_press: root.on_button_press()
+            MDLabel:
+                id: time_label
+                text: "01:43"
+                size_hint_x: None
+                halign: "left"
+                color: 110/255, 133/255, 169/255, 1
+            MDLabel:
+                id: date_label
+                text: "2025.10.03 [Friday]"
+                halign: "left"
+                size_hint_x: 1
+                color: 110/255, 133/255, 169/255, 1
+            MDLabel:
+                id: battery_label
+                text: "33%"
+                halign: "right"
+                spacing: dp (30)
+                color: 110/255, 133/255, 169/255, 1
 
-    Label:
-        text: root.status_text
-        font_size: '20sp'
+        # 메인 컨텐츠
+        MDBoxLayout:
+            orientation: "horizontal"
+            spacing: dp(15)
+            padding: [dp(15), dp(10), dp(15), dp(20)]
+
+            MDCard:
+                size_hint_x: 0.6
+                radius: [dp(20)] * 4
+                elevation: 2
+                md_bg_color: 1, 1, 1, 1
+
+                FitImage:
+                    source: "Apart.jpg"
+                    radius: [dp(20)] * 4
+                    size_hint: 1, 1
+
+
+            MDBoxLayout:
+                orientation: "vertical"
+                spacing: dp(15)
+                size_hint_x: 0.4
+
+                MDCard:
+                    size_hint_y: None
+                    height: dp(60)
+                    md_bg_color: 1, 1, 1, 1
+                    radius: [dp(20)] * 4
+                    elevation: 0
+                    ripple_behavior: True
+                    MDLabel:
+                        text: "Visitor Log"
+                        halign: "center"
+                        color: 110/255, 133/255, 169/255, 1
+
+                MDCard:
+                    size_hint_y: None
+                    height: dp(80)
+                    md_bg_color: 1, 1, 1, 1
+                    radius: [dp(20)] * 4
+                    elevation: 0
+
+                    MDBoxLayout:
+                        orientation: "vertical"
+                        padding: dp(10)
+                        spacing: dp(5)
+
+                        MDLabel:
+                            text: "Home Status"
+                            halign: "center"
+                            font_name: "Roboto"
+                            color: 110/255, 133/255, 169/255, 1
+                            font_size: "18sp"
+
+                        MDLabel:
+                            text: "Face interface"
+                            halign: "center"
+                            font_name: "Roboto"
+                            color: 136/255, 169/255, 217/255, 1
+                            font_size: "15sp"
+
+
+
+                MDCard:
+                    md_bg_color: 1, 1, 1, 1
+                    radius: [dp(20)] * 4
+                    elevation: 0
+                    MDLabel:
+                        id: weather_label
+                        text: "Weather"
+                        halign: "center"
+                        color: 110/255, 133/255, 169/255, 1
+
+        MDNavigationBar:
+            md_bg_color: 1, 1, 1, 1
+            size_hint_y: None
+            height: dp(60)
+
+            MDNavigationItem:
+                MDNavigationItemIcon:
+                    icon: "home-outline"
+
+            MDNavigationItem:
+                MDNavigationItemIcon:
+                    icon: "bell-outline"
+
+            MDNavigationItem:
+                MDNavigationItemIcon:
+                    icon: "file-document-outline"
+
+            MDNavigationItem:
+                MDNavigationItemIcon:
+                    icon: "cog-outline"
