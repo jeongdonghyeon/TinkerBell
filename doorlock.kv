@@ -1,0 +1,68 @@
+MDScreenManager:
+    MDScreen:
+        name: "doorlock"
+        MDBoxLayout:
+            orientation: 'vertical'
+            padding: 20
+            spacing: 10
+
+            MDBoxLayout:
+                orientation: 'horizontal'
+                size_hint_y: 0.15
+                padding: [0, 10]
+                adaptive_height: True
+                pos_hint: {'center_y': 0.5}
+                spacing: '20dp'
+
+                MDLabel:
+                    id: date_label
+                    text: "2025.10.17 (금)"
+                    font_name: 'SpoqaSans'
+                    font_size: '20sp'
+                    halign: 'left'
+                    adaptive_size: True
+                    pos_hint: {'center_y': 0.5}
+
+                MDLabel:
+                    id: time_label
+                    text: "03:38"
+                    font_name: 'SpoqaSans'
+                    font_size: '35sp'
+                    halign: 'left'
+                    bold: True
+                    adaptive_size: True
+
+
+            Image:
+                id: camera_view
+                allow_stretch: True
+                keep_ratio: False
+                size_hint_y: 0.55
+
+
+            MDLabel:
+                id: status_label
+                text: '방문자를 기다리고 있습니다...'
+                font_name: 'SpoqaSans'
+                font_size: '20sp'
+                size_hint_y: 0.1
+                halign: 'center'
+
+            MDBoxLayout:
+                orientation: 'horizontal'
+                size_hint_y: 0.2
+                spacing: 10
+
+                MDRaisedButton:
+                    text: '열림'
+                    font_name: 'SpoqaSans'
+                    font_size: '24sp'
+                    size_hint: 1, 1
+                    on_press: app.unlock_door()
+
+                MDRaisedButton:
+                    text: '닫힘'
+                    font_name: 'SpoqaSans'
+                    font_size: '24sp'
+                    size_hint: 1, 1
+                    on_press: app.lock_door()
