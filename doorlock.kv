@@ -6,12 +6,12 @@ MDScreenManager:
             padding: 20
             spacing: 10
 
+            # 상단 바 (날짜 + 시계 + 초대 버튼)
             MDBoxLayout:
                 orientation: 'horizontal'
                 size_hint_y: 0.15
                 padding: [0, 10]
                 adaptive_height: True
-                pos_hint: {'center_y': 0.5}
                 spacing: '20dp'
 
                 MDLabel:
@@ -31,15 +31,26 @@ MDScreenManager:
                     halign: 'left'
                     bold: True
                     adaptive_size: True
+                    pos_hint: {'center_y': 0.5}
 
+                Widget:
 
+                MDRaisedButton:
+                    text: "초대 코드 발급"
+                    font_name: 'SpoqaSans'
+                    size_hint: (None, None)
+                    size: ("220dp", "55dp")
+                    pos_hint: {"center_y": 0.5}
+                    on_release: app.root.current = "invite"
+
+            # 카메라 프리뷰
             Image:
                 id: camera_view
                 allow_stretch: True
                 keep_ratio: False
                 size_hint_y: 0.55
 
-
+            # 상태 표시
             MDLabel:
                 id: status_label
                 text: '방문자를 기다리고 있습니다...'
@@ -48,21 +59,88 @@ MDScreenManager:
                 size_hint_y: 0.1
                 halign: 'center'
 
-            MDBoxLayout:
-                orientation: 'horizontal'
-                size_hint_y: 0.2
-                spacing: 10
 
-                MDRaisedButton:
-                    text: '열림'
-                    font_name: 'SpoqaSans'
-                    font_size: '24sp'
-                    size_hint: 1, 1
-                    on_press: app.unlock_door()
 
-                MDRaisedButton:
-                    text: '닫힘'
-                    font_name: 'SpoqaSans'
-                    font_size: '24sp'
-                    size_hint: 1, 1
-                    on_press: app.lock_door()
+    MDScreen:
+        name: "invite"
+        MDBoxLayout:
+            orientation: 'vertical'
+            spacing: 25
+            padding: [40, 60, 40, 60]
+
+            MDLabel:
+                text: "초대 코드 발급 페이지"
+                halign: "center"
+                font_name: 'SpoqaSans'
+                font_size: '30sp'
+                bold: True
+
+            MDSeparator:
+                height: "2dp"
+
+            MDLabel:
+                text: "라즈베리파이와 앱을 연결하려면\n아래 버튼을 눌러 초대 코드를 생성하세요."
+                halign: "center"
+                font_name: 'SpoqaSans'
+                font_size: '18sp'
+                theme_text_color: "Hint"
+
+            Widget:
+                size_hint_y: 0.05
+
+            MDRaisedButton:
+                text: "초대 코드 생성하기"
+                pos_hint: {"center_x": 0.5}
+                size_hint: (0.6, None)
+                height: "55dp"
+                font_name: 'SpoqaSans'
+                font_size: '20sp'
+                md_bg_color: app.theme_cls.primary_color
+                on_release: app.generate_invite_code()
+
+            # 초대 코드 표시 카드
+            MDCard:
+                size_hint: (0.8, None)
+                height: "120dp"
+                pos_hint: {"center_x": 0.5}
+                md_bg_color: app.theme_cls.bg_light
+                elevation: 1
+                radius: [20, 20, 20, 20]
+                MDBoxLayout:
+                    orientation: "vertical"
+                    padding: [20, 10]
+                    spacing: 8
+
+                    MDLabel:
+                        text: "생성된 초대 코드"
+                        halign: "center"
+                        font_name: 'SpoqaSans'
+                        font_size: '18sp'
+                        theme_text_color: "Secondary"
+
+                    MDLabel:
+                        id: code_label
+                        text: "아직 코드가 없습니다."
+                        halign: "center"
+                        font_name: 'SpoqaSans'
+                        font_size: '28sp'
+                        bold: True
+
+            # Firebase 상태 텍스트
+            MDLabel:
+                id: firebase_status_label
+                text: ""
+                halign: "center"
+                font_name: 'SpoqaSans'
+                theme_text_color: "Hint"
+
+            Widget:
+                size_hint_y: 0.05
+
+            MDRaisedButton:
+                text: "← 메인 화면으로"
+                pos_hint: {"center_x": 0.5}
+                size_hint: (0.5, None)
+                height: "50dp"
+                font_name: 'SpoqaSans'
+                on_release: app.root.current = "doorlock"
